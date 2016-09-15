@@ -26,6 +26,18 @@ class nexus::params {
             }
           }
         }
+        '14.04' : {
+          case $::architecture {
+            'amd64' : {
+              $java_home = '/usr/lib/jvm/java-7-openjdk-amd64'
+              $jsw = 'linux-x86-64'
+            }
+            default : {
+              fail("The ${module_name} module is not supported on ${::operatingsystem} release ${::operatingsystemrelease} ${::architecture}"
+              )
+            }
+          }
+        }
         default : {
           fail("The ${module_name} module is not supported on ${::operatingsystem} release ${::operatingsystemrelease}")
         }
